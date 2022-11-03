@@ -1,15 +1,32 @@
 import Head from "next/head";
 
-export default function Home() {
+import axios from "axios";
+
+import { Banner, Header, ProductFeed } from "../components";
+
+export default function Home({ products }) {
   return (
     <>
       <Head>
         <title>Amazon</title>
       </Head>
 
-      <section>
-        <h1>Amazon!</h1>
-      </section>
+      <Header />
+
+      <main className="max-w-screen-2xl m-auto bg-gray-100 px-10">
+        <Banner />
+        <ProductFeed products={products} />
+      </main>
     </>
   );
 }
+
+export const getServerSideProps = async () => {
+  const {
+    data: { products },
+  } = await axios.get("https://dummyjson.com/products?limit=20");
+
+  return {
+    props: { products },
+  };
+};
