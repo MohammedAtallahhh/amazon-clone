@@ -7,6 +7,7 @@ import {
   ShoppingCartIcon,
   Bars3Icon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const HeaderClasses = {
   topNav:
@@ -47,9 +48,8 @@ const Header = () => {
     bottomNavLink,
   } = HeaderClasses;
 
+  // Authentication session
   const session = useSession();
-
-  console.log({ session });
 
   return (
     <>
@@ -57,15 +57,17 @@ const Header = () => {
         {/*=================== Top Navbar =================*/}
         <div className={topNav}>
           {/* logo */}
-          <div className={logo}>
-            <Image
-              src="https://links.papareact.com/f90"
-              layout="fill"
-              alt="Amazon logo"
-              objectFit="contain"
-              className="link"
-            />
-          </div>
+          <Link href="/">
+            <div className={logo}>
+              <Image
+                src="https://links.papareact.com/f90"
+                layout="fill"
+                alt="Amazon logo"
+                objectFit="contain"
+                className="link"
+              />
+            </div>
+          </Link>
 
           {/* search box */}
           <div className={searchBox}>
@@ -95,13 +97,15 @@ const Header = () => {
                 </p>
               </div>
 
-              <div className="relative h-full link flex items-center gap-2">
-                <span className={cartBadge}>3</span>
-                <ShoppingCartIcon className="w-full h-full" />
-                <p className="font-extrabold text-xs lg:text-sm hidden md:inline">
-                  Basket:
-                </p>
-              </div>
+              <Link href="/checkout">
+                <div className="relative h-full link flex items-center gap-2">
+                  <span className={cartBadge}>3</span>
+                  <ShoppingCartIcon className="w-full h-full" />
+                  <p className="font-extrabold text-xs lg:text-sm hidden md:inline">
+                    Basket:
+                  </p>
+                </div>
+              </Link>
             </div>
           ) : (
             <button className="text-lg text-white px-4" onClick={signIn}>
