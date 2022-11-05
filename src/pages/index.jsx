@@ -13,7 +13,7 @@ export default function Home({ products }) {
 
       <Header />
 
-      <main className="max-w-screen-2xl m-auto bg-gray-100 px-10">
+      <main className="max-w-screen-2xl m-auto bg-gray-100">
         <Banner />
         <ProductFeed products={products} />
       </main>

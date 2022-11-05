@@ -6,9 +6,9 @@ import { StarIcon } from "@heroicons/react/24/solid";
 const Product = ({ data: { category, title, description, price, images } }) => {
   const [rating] = useState(Math.floor(Math.random() * 5) + 1);
 
-  const hasPrime = true;
+  const hasPrime = false;
   return (
-    <div className="relative z-30 flex flex-col p-10 bg-white text-left">
+    <div className="relative z-30 flex flex-col gap-3 p-10 bg-white text-left shadow-md">
       <p className="capitalize absolute top-2 right-2 text-xs text-gray-400 italic">
         {category.replace(/-/g, " ")}
       </p>
@@ -24,7 +24,7 @@ const Product = ({ data: { category, title, description, price, images } }) => {
         {Array(rating)
           .fill()
           .map(($, i) => (
-            <StarIcon className="h-5 text-yellow-500" />
+            <StarIcon key={i} className="h-5 text-yellow-500" />
           ))}
       </div>
 
@@ -48,7 +48,7 @@ const Product = ({ data: { category, title, description, price, images } }) => {
         </div>
       )}
 
-      <button className="mt-auto btn">Add to basket</button>
+      <button className="btn mt-auto font-semibold">Add to basket</button>
     </div>
   );
 };

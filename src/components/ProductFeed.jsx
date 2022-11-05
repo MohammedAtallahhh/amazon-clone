@@ -1,12 +1,10 @@
 import React from "react";
 
-import axios from "axios";
-
 import Product from "./Product";
 
 const ProductFeed = ({ products }) => {
   return (
-    <div className="grid gap-6 grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-20 px-5 md:-mt-40">
+    <div className="grid gap-6 grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-20 px-10 md:-mt-40">
       {/* First 4 products */}
       {products.slice(0, 4).map((product) => (
         <Product key={product.id} data={product} />
