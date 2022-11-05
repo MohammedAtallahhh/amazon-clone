@@ -8,6 +8,8 @@ import {
   Bars3Icon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { selectItems } from "../slices/basketSlice";
 
 const HeaderClasses = {
   topNav:
@@ -51,6 +53,8 @@ const Header = () => {
   // Authentication session
   const session = useSession();
 
+  const cartLength = useSelector(selectItems).length;
+
   return (
     <>
       <header>
@@ -68,7 +72,6 @@ const Header = () => {
               />
             </div>
           </Link>
-
           {/* search box */}
           <div className={searchBox}>
             <input type="text" className={searchBoxInput} />
@@ -76,11 +79,9 @@ const Header = () => {
               <MagnifyingGlassIcon className="w-full h-full" />
             </button>
           </div>
-
           {/* actions */}
-
-          {session.data ? (
-            <div className={actions}>
+          <div className={actions}>
+            {session.data ? (
               <div className="message link" onClick={signOut}>
                 <h2 className="text-[12px] lg:text-sm">
                   Hello {session?.data?.user?.name}
@@ -89,29 +90,31 @@ const Header = () => {
                   Accounts & lists
                 </p>
               </div>
+            ) : (
+              <button
+                className="text-lg text-white py-1 px-4 border-2"
+                onClick={signIn}
+              >
+                Sign in
+              </button>
+            )}
 
-              <div className="link">
-                <h3 className="text-sm">Returns</h3>
-                <p className="font-extrabold text-[12px] lg:text-sm">
-                  & Orders
+            <div className="link">
+              <h3 className="text-sm">Returns</h3>
+              <p className="font-extrabold text-[12px] lg:text-sm">& Orders</p>
+            </div>
+
+            <Link href="/checkout">
+              <div className="relative h-full link flex items-center gap-2">
+                <span className={cartBadge}>{cartLength}</span>
+                <ShoppingCartIcon className="w-full h-full" />
+                <p className="font-extrabold text-xs lg:text-sm hidden md:inline">
+                  Basket:
                 </p>
               </div>
-
-              <Link href="/checkout">
-                <div className="relative h-full link flex items-center gap-2">
-                  <span className={cartBadge}>3</span>
-                  <ShoppingCartIcon className="w-full h-full" />
-                  <p className="font-extrabold text-xs lg:text-sm hidden md:inline">
-                    Basket:
-                  </p>
-                </div>
-              </Link>
-            </div>
-          ) : (
-            <button className="text-lg text-white px-4" onClick={signIn}>
-              Sign in
-            </button>
-          )}
+            </Link>
+          </div>
+          )
         </div>
 
         {/*====================== Bottom Navbar ===================*/}
