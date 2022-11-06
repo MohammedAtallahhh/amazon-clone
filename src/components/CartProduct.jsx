@@ -19,12 +19,12 @@ const CartProduct = ({ data }) => {
   return (
     <li key={id} className="w-full lg:flex justify-between mb-5 border-b pb-4">
       {/* image  */}
-      <div className="relative flex-shrink-0 w-[200px] h-[180px] my-auto mx-auto lg:mr-5">
-        <Image src={images[0]} layout="fill" />
+      <div className="relative flex-shrink-0 flex justify-center w-[180px] h-[140px] my-auto mx-auto lg:mr-5">
+        <Image src={images[0]} layout="fill" objectFit="contain" />
       </div>
 
       {/* info */}
-      <div className="flex flex-col gap-2 p-3">
+      <div className="flex-grow flex flex-col gap-2 p-3">
         {/* title */}
         <h3 className="font-semibold text-lg">{title}</h3>
 
@@ -39,12 +39,12 @@ const CartProduct = ({ data }) => {
 
         {/* Quantity */}
         <div className="flex items-center mt-2 mb-3">
-          <span className="text-xl">Quantity:</span>
+          <span className="font-semibold">Quantity:</span>
 
           <input
             type="number"
             value={quantity}
-            className="border-2 p-1 w-[60px] ml-3 text-xl"
+            className="border-2 border-gray-300 pl-2 w-[60px] ml-3 text-xl"
             onChange={(e) =>
               dispatch(changeQuantity({ id, quantity: +e.target.value }))
             }

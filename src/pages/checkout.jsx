@@ -34,7 +34,7 @@ const Checkout = () => {
         <div className="w-[95%] max-w-screen-2xl mx-auto lg:flex">
           <div className="lg:w-[72%] flex-grow lg:mr-5 mb-10 lg:mb-0 shadow-sm">
             {/* banner */}
-            <div className="relative w-full h-[160px] mb-5">
+            <div className="relative w-full h-[140px] mb-5">
               <Image
                 src="https://links.papareact.com/ikj"
                 layout="fill"

@@ -36,6 +36,12 @@ const HeaderClasses = {
 };
 
 const Header = () => {
+  const products = useSelector(selectItems);
+  // Authentication session
+  const session = useSession();
+
+  const cartLength = products.reduce((acc, cur) => cur.quantity + acc, 0);
+
   const {
     topNav,
     logo,
@@ -49,11 +55,6 @@ const Header = () => {
     menuIcon,
     bottomNavLink,
   } = HeaderClasses;
-
-  // Authentication session
-  const session = useSession();
-
-  const cartLength = useSelector(selectItems).length;
 
   return (
     <>
@@ -81,8 +82,8 @@ const Header = () => {
           </div>
           {/* actions */}
           <div className={actions}>
-            {session.data ? (
-              <div className="message link" onClick={signOut}>
+            {session.data && (
+              <div className="message link">
                 <h2 className="text-[12px] lg:text-sm">
                   Hello {session?.data?.user?.name}
                 </h2>
@@ -90,13 +91,6 @@ const Header = () => {
                   Accounts & lists
                 </p>
               </div>
-            ) : (
-              <button
-                className="text-lg text-white py-1 px-4 border-2"
-                onClick={signIn}
-              >
-                Sign in
-              </button>
             )}
 
             <div className="link">
@@ -113,8 +107,23 @@ const Header = () => {
                 </p>
               </div>
             </Link>
+
+            {session.data ? (
+              <button
+                className="text-md text-white font-semibold bg-red-600 border-2 border-red-700 hover:bg-red-700 py-2 px-4 rounded-full transition-all"
+                onClick={signOut}
+              >
+                Sign out
+              </button>
+            ) : (
+              <button
+                className="text-md text-white py-2 px-4 border-2 rounded-full"
+                onClick={signIn}
+              >
+                Sign in
+              </button>
+            )}
           </div>
-          )
         </div>
 
         {/*====================== Bottom Navbar ===================*/}
